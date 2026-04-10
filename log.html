@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Supabase Auth</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 320px;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 10px;
+    background: #0ea5e9;
+    color: white;
+    cursor: pointer;
+}
+
+.msg {
+    margin-top: 10px;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Login System</h2>
+
+    <input type="email" id="email" placeholder="Enter Email">
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="signup()">Sign Up</button>
+    <button onclick="login()">Login</button>
+    <button onclick="resetPass()">Forgot Password</button>
+
+    <div class="msg" id="msg"></div>
+</div>
+
+<!-- ✅ FIXED CDN -->
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+// 🔥 अपना सही URL और KEY डालो
+const supabase = createClient(
+  "https://YOUR_PROJECT_URL.supabase.co",
+  "YOUR_ANON_KEY"
+);
+
+function showMsg(text, color="green") {
+    const msg = document.getElementById("msg");
+    msg.innerText = text;
+    msg.style.color = color;
+}
+
+// ✅ SIGNUP (REAL)
+window.signup = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+    });
+
+    console.log(data, error);
+
+    if (error) {
+        showMsg(error.message, "red");
+    } else {
+        showMsg("Signup successful! Email verify करो 📩");
+    }
+};
+
+// ✅ LOGIN (REAL)
+window.login = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    console.log(data, error);
+
+    if (error) {
+        showMsg(error.message, "red");
+    } else {
+        showMsg("Login success 🎉");
+    }
+};
+
+// ✅ RESET PASSWORD (REAL)
+window.resetPass = async () => {
+    const email = document.getElementById("email").value;
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email);
+
+    if (error) {
+        showMsg(error.message, "red");
+    } else {
+        showMsg("Reset link भेज दिया 📩");
+    }
+};
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Supabase Auth</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    width: 320px;
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 10px;
+    background: #0ea5e9;
+    color: white;
+    cursor: pointer;
+}
+
+.msg {
+    margin-top: 10px;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Login System</h2>
+
+    <input type="email" id="email" placeholder="Enter Email">
+    <input type="password" id="password" placeholder="Enter Password">
+
+    <button onclick="signup()">Sign Up</button>
+    <button onclick="login()">Login</button>
+    <button onclick="resetPass()">Forgot Password</button>
+
+    <div class="msg" id="msg"></div>
+</div>
+
+<!-- ✅ FIXED CDN -->
+<script type="module">
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+// 🔥 अपना सही URL और KEY डालो
+const supabase = createClient(
+  "https://YOUR_PROJECT_URL.supabase.co",
+  "YOUR_ANON_KEY"
+);
+
+function showMsg(text, color="green") {
+    const msg = document.getElementById("msg");
+    msg.innerText = text;
+    msg.style.color = color;
+}
+
+// ✅ SIGNUP (REAL)
+window.signup = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+    });
+
+    console.log(data, error);
+
+    if (error) {
+        showMsg(error.message, "red");
+    } else {
+        showMsg("Signup successful! Email verify करो 📩");
+    }
+};
+
+// ✅ LOGIN (REAL)
+window.login = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+    });
+
+    console.log(data, error);
+
+    if (error) {
+        showMsg(error.message, "red");
+    } else {
+        showMsg("Login success 🎉");
+    }
+};
+
+// ✅ RESET PASSWORD (REAL)
+window.resetPass = async () => {
+    const email = document.getElementById("email").value;
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email);
+
+    if (error) {
+        showMsg(error.message, "red");
+    } else {
+        showMsg("Reset link भेज दिया 📩");
+    }
+};
+</script>
+
+</body>
+</html>
